@@ -22,6 +22,11 @@
       "~app": ["./app"],
       "~app/*": ["./app/*"],
 
+      "~pages": ["./pages"],
+      "~pages/*": ["./pages/*"],
+
+      "~features/*": ["./features/*"],
+
       "~entities/*": ["./entities/*"],
 
       "~shared": ["./shared"],

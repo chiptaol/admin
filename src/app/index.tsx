@@ -1,5 +1,11 @@
+import { Pages } from '~pages'
+
+import { withProviders } from './providers'
+
 import './main.css'
 
-export const App = () => {
-  return <h1 className="text-3xl text-blue-500">Chipta ol admin</h1>
+const App = () => {
+  return <Pages />
 }
+
+export default withProviders(App)
