@@ -1,2 +1,5 @@
 export { InputNumber } from './input-number'
 export { FormControl } from './form-control'
+export { Input } from './input'
+export { Button } from './button'
+export { Spinner } from './spinner'

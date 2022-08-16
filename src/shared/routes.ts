@@ -1,5 +1,6 @@
-import { createRoute } from "atomic-router";
+import { createRoute } from 'atomic-router'
 
 export const routes = {
-    home: createRoute()
+  home: createRoute(),
+  signIn: createRoute(),
 }
