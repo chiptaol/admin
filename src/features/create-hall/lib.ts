@@ -16,13 +16,15 @@ export type Seat = {
   id: string
 }
 
+export const HALL_CONTAINER_WIDTH = 720
+
 function generateRow(order: number): Row {
   return {
     id: order,
     order: order,
     gapBetweenSeats: 5,
     x: 0,
-    y: (order - 1) * cinema.config.SEAT_HEIGHT,
+    y: (order - 1) * (cinema.config.SEAT_HEIGHT + 5),
     seats: normalizr(generateSeats(5)),
   }
 }

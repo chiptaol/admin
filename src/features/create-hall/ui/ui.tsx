@@ -1,41 +1,49 @@
 import { useList, useStore, useStoreMap } from 'effector-react'
-import { memo } from 'react'
+
 import { CinemaHallScreen, Seat } from '~entities/cinema'
 
-import * as model from '../model'
 import { Settings } from './settings'
+
+import * as model from '../model'
+import { HALL_CONTAINER_WIDTH } from '../lib'
 
 export const CreateHall = () => {
   return (
-    <div className="w-full h-full flex justify-center items-center">
-      {/* <Container>
-        <CinemaHallScreen />
-        <div style={{ transformOrigin: '0 0', transform: `scale(${scale})` }}></div>
-      </Container>
-      <div className="flex flex-col space-y-1">
-        <button onClick={() => setScale((prev) => prev + 0.1)}>zoom in</button>
-        <button onClick={() => setScale((prev) => prev - 0.1)}>zoom out</button>
-      </div> */}
+    <div className="flex space-x-5 p-6">
       <Settings />
-      <Container>
-        <Rows />
-      </Container>
+      <div className="flex flex-col space-y-4 w-max h-max relative">
+        <CinemaHallScreen />
+        <Container>
+          <ZoomContainer>
+            <Rows />
+          </ZoomContainer>
+        </Container>
+        <Zoom />
+      </div>
     </div>
   )
 }
 
 const Container = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div style={{ width: 600 }} className="h-[600px] overflow-auto">
+    <div
+      style={{ width: HALL_CONTAINER_WIDTH }}
+      className="h-[600px] overflow-auto flex-2 relative"
+    >
       {children}
     </div>
   )
 }
 
-const Rows = () => {
-  const rows = useList(model.$rowsList, (row) => <SeatsRow rowOrder={row} />)
+const ZoomContainer = ({ children }: { children: React.ReactNode }) => {
+  const scale = useStore(model.$scale)
+  return <div style={{ transformOrigin: '0 0', transform: `scale(${scale})` }}>{children}</div>
+}
 
-  return <div className="flex flex-col space-y-1">{rows}</div>
+const Rows = () => {
+  const rows = useList(model.$rowsList, (row) => <SeatsRow key={row} rowOrder={row} />)
+
+  return <>{rows}</>
 }
 
 const SeatsRow = ({ rowOrder }: { rowOrder: number }) => {
@@ -51,12 +59,31 @@ const SeatsRow = ({ rowOrder }: { rowOrder: number }) => {
   const { seats, gapBetweenSeats } = row
 
   return (
-    <div className={`flex items-center z-10 w-max`}>
+    <div style={{ top: row.y, left: row.x }} className="flex items-center w-max absolute">
       {Object.values(seats).map((seat, index) => (
         <div key={seat.id} style={{ marginLeft: index !== 0 ? gapBetweenSeats : 0 }}>
           <Seat isVip={seat.isVip} place={index + 1} />
         </div>
       ))}
+    </div>
+  )
+}
+
+const Zoom = () => {
+  return (
+    <div className="flex flex-col space-y-0 absolute top-16 -right-12">
+      <button
+        onClick={() => model.scale.increment()}
+        className="flex justify-center items-center rounded border border-gray-200 bg-slate-50 h-10 w-10"
+      >
+        +
+      </button>
+      <button
+        onClick={() => model.scale.decrement()}
+        className="flex justify-center items-center rounded border border-gray-200 bg-slate-50 h-10 w-10"
+      >
+        -
+      </button>
     </div>
   )
 }

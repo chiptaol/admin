@@ -7,3 +7,12 @@ body,
 #root {
   height: 100%;
 }
+
+.scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 8px;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #89b8ff;
+  border-radius: 8px;
+}
