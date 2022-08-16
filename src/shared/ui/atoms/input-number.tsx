@@ -1,16 +1,18 @@
 import { GoChevronUp, GoChevronDown } from 'react-icons/go'
 
 type Props = {
-  value: number
+  value: number | string
   onIncrement: () => void
   onDecrement: () => void
+  limit?: number
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export const InputNumber = (props: Props) => {
   return (
     <div className="flex items-center space-x-0">
-      <Input value={props.value} />
-      <Button onClick={props.onIncrement}>
+      <Input onChange={props.onChange} value={props.value} />
+      <Button disabled={props.limit === props.value} onClick={props.onIncrement}>
         <GoChevronUp />
       </Button>
       <Button disabled={props.value === 0} className="rounded-r" onClick={props.onDecrement}>
@@ -43,12 +45,13 @@ const Button = ({
   )
 }
 
-const Input = ({ value }: Pick<Props, 'value'>) => {
+const Input = ({ value, onChange }: Pick<Props, 'value' | 'onChange'>) => {
   return (
     <input
       type="number"
       value={value}
-      readOnly
+      readOnly={typeof onChange === 'undefined'}
+      onChange={onChange}
       className="h-8 w-12 border border-gray-300 text-sm text-black bg-slate-100 px-2 rounded-l"
     />
   )
