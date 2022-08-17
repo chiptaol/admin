@@ -27,6 +27,7 @@ async function request({ path, method, ...params }: Request) {
     method,
     body,
     headers,
+    credentials: 'include',
   })
 
   const answer = await getResponseAnswer(response)
@@ -47,7 +48,6 @@ function getDefaultHeaders() {
   return {
     'Content-type': 'application/json',
     'Accept': 'application/json',
-    'credentials': 'include',
   }
 }
 
