@@ -47,6 +47,7 @@ function getDefaultHeaders() {
   return {
     'Content-type': 'application/json',
     'Accept': 'application/json',
+    'credentials': 'include',
   }
 }
 

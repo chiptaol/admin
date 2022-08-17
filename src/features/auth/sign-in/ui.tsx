@@ -1,4 +1,5 @@
 import { Field, useField } from 'effector-forms'
+
 import { Button, FormControl, Input } from '~shared/ui'
 
 import * as model from './model'
@@ -12,6 +13,8 @@ export const SignIn = () => {
   )
 }
 
+console.log(document.cookie)
+
 const Form = () => {
   return (
     <form onSubmit={onSubmit} className="w-full">
@@ -22,6 +25,12 @@ const Form = () => {
       <Button type="submit" className="w-full">
         Submit
       </Button>
+      <button
+        type="button"
+        onClick={() => model.form.setForm({ email: 'fbb@gmail.com', password: '300620036Fbb' })}
+      >
+        DEV_BUTTON
+      </button>
     </form>
   )
 }
