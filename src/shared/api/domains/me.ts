@@ -22,14 +22,3 @@ export const fetchMeRequestFx = createEffect<
     })
   },
 })
-
-export const setCookieRequestFx = createEffect({
-  async handler() {
-    const response = await authenticatedRequestFx({
-      path: 'set',
-      method: 'GET',
-    })
-
-    console.log(response)
-  },
-})

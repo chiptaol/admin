@@ -1,12 +1,18 @@
 import { chainRoute, RouteInstance, RouteParamsAndQuery } from 'atomic-router'
-import { attach, createEffect, createStore, sample } from 'effector'
+import { attach, createEffect, createEvent, createStore, sample } from 'effector'
+import { persist } from 'effector-storage/local'
+import { combineEvents } from 'patronum'
 
 import { request } from '~shared/api'
 import { router, routes } from '~shared/routes'
+import { appStarted } from '~shared/system'
 import { types } from '~shared/types'
+
+export const cinemaSelected = createEvent<number>()
 
 export const $session = createStore<types.User | null>(null)
 export const $isAuthorized = $session.map(Boolean)
+export const $selectedCinema = createStore<null | number>(null)
 
 export const signInFx = attach({ effect: request.signInRequestFx })
 export const signOutFx = attach({ effect: request.signOutRequestFx })
@@ -18,6 +24,7 @@ export const checkSessionFx = createEffect(async (_: RouteParamsAndQuery<any>) =
 })
 
 $session.on(fetchMeFx.doneData, (_, { answer }) => answer).reset(signOutFx.done)
+$selectedCinema.on(cinemaSelected, (_, cId) => cId)
 
 export const authorizedRoute = <Params>(route: RouteInstance<Params>) => {
   const alreadyAuthorized = sample({
@@ -25,10 +32,16 @@ export const authorizedRoute = <Params>(route: RouteInstance<Params>) => {
     filter: (status) => status === 'ok',
   })
 
+  const cinemaSelected = sample({
+    clock: [appStarted, $selectedCinema],
+    source: $selectedCinema,
+    filter: (cId) => cId !== null,
+  })
+
   return chainRoute({
     route,
     beforeOpen: checkSessionFx,
-    openOn: [alreadyAuthorized],
+    openOn: [combineEvents({ events: [alreadyAuthorized, cinemaSelected] })],
   })
 }
 
@@ -40,3 +53,16 @@ sample({
     params: {},
   })),
 })
+
+sample({
+  clock: signOutFx.done,
+  fn: () => ({}),
+  target: routes.signIn.open,
+})
+
+persist({
+  store: $selectedCinema,
+  key: 'cinemaId',
+})
+
+cinemaSelected.watch(() => window.location.reload())

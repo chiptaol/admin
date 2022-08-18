@@ -1,6 +1,6 @@
-import { chainRoute, redirect, RouteParamsAndQuery } from 'atomic-router'
-import { attach, sample } from 'effector'
-import { session } from '~entities/session'
+import { redirect, RouteParamsAndQuery } from 'atomic-router'
+import { attach } from 'effector'
+
 import { request } from '~shared/api'
 import { routes } from '~shared/routes'
 
@@ -11,15 +11,7 @@ const checkSessionFx = attach({
   mapParams: (_: RouteParamsAndQuery<any>) => {},
 })
 
-const sessionCheckedRoute = chainRoute({
-  route: currentRoute,
-  beforeOpen: checkSessionFx,
-  openOn: [checkSessionFx.failData],
-})
-
 redirect({
   clock: checkSessionFx.done,
   route: routes.notFound,
 })
-
-currentRoute.opened.watch(() => 'sign in page opened')

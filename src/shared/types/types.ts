@@ -54,3 +54,11 @@ export type FetchMeRequestDone = {
 export type FetchMeRequestFail = GenericErrors
 
 export type User = typed.Get<typeof contract.user>
+
+export type Cinema = typed.Get<typeof contract.cinema>
+
+export type FetchCinemasRequestDone = {
+  status: 'ok'
+  answer: typed.Get<typeof contract.fetchCinemasRequestOk>
+}
+export type FetchCinemasRequestFail = GenericErrors

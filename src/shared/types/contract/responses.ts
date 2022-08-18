@@ -16,3 +16,7 @@ export const signOutRequestNotAuthorized = typed.obj({
 })
 
 export const fetchMeRequestOk = entity.user
+
+export const fetchCinemasRequestOk = typed.obj({
+  data: typed.arr(entity.cinema),
+})

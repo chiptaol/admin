@@ -1,0 +1,1 @@
+export { SelectCinema } from './select'

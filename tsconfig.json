@@ -25,6 +25,8 @@
       "~pages": ["./pages"],
       "~pages/*": ["./pages/*"],
 
+      "~widgets/*": ["./widgets/*"],
+
       "~features/*": ["./features/*"],
 
       "~entities/*": ["./entities/*"],

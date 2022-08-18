@@ -2,6 +2,7 @@ import { sample, split } from 'effector'
 import { createForm } from 'effector-forms'
 import { condition } from 'patronum'
 import * as yup from 'yup'
+import { cinema } from '~entities/cinema'
 
 import { session } from '~entities/session'
 import { createRule } from '~shared/lib/create-rule'
@@ -41,11 +42,11 @@ sample({
     email: fields.email!,
     password: fields.password!,
   }),
-  target: session.signInFx,
+  target: session.model.signInFx,
 })
 
 split({
-  source: session.signInFx.failData,
+  source: session.model.signInFx.failData,
   match: ({ status }) => status,
   cases: {
     wrong_password: form.fields.password.addError.prepend<types.SignInRequestFail>(() => ({
@@ -61,11 +62,16 @@ split({
 
 condition({
   source: sample({
-    clock: session.signInFx.done,
+    clock: session.model.signInFx.done,
     source: routes.signIn.$query,
     fn: (query) => query?.redirectUri ?? null,
   }),
   if: (redirectUri: string | null) => Boolean(redirectUri),
   then: redirectedByHistory.prepend<string | null | void>((path) => path ?? '/'),
   else: routes.home.open.prepend(() => ({})),
+})
+
+sample({
+  clock: session.model.signInFx.done,
+  target: cinema.model.fetchCinemasFx,
 })

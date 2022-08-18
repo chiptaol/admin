@@ -1,7 +1,7 @@
 import { useUnit } from 'effector-react'
+
 import { CreateHall } from '~features/create-hall'
-import { setCookieRequestFx } from '~shared/api/domains'
-import { Button, PageLoader } from '~shared/ui'
+import { PageLoader } from '~shared/ui'
 
 import * as model from './model'
 
@@ -15,7 +15,6 @@ export const HomePage = () => {
   return (
     <div className="w-full h-full">
       <CreateHall />
-      <Button onClick={() => setCookieRequestFx()}>setCookie</Button>
     </div>
   )
 }

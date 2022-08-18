@@ -1,1 +1,6 @@
-export * as session from './model'
+import * as model from './model'
+export * from './ui'
+
+export const session = {
+  model,
+}
