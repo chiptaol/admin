@@ -3,22 +3,13 @@ import { Route } from 'atomic-router-react'
 import { routes } from '~shared/routes'
 
 import { HomePage } from './home'
+import { NotFoundPage } from './not-found'
 import { SignInPage } from './sign-in'
 
 export const Pages = () => (
   <>
     <Route route={routes.home} view={HomePage} />
     <Route route={routes.signIn} view={SignInPage} />
+    <Route route={routes.notFound} view={NotFoundPage} />
   </>
 )
-
-export const routesMap = [
-  {
-    path: '/',
-    route: routes.home,
-  },
-  {
-    path: '/sign-in',
-    route: routes.signIn,
-  },
-]

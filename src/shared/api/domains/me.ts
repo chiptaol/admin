@@ -1,11 +1,15 @@
 import { createEffect } from 'effector'
 
 import { parseByStatus } from '~shared/lib/parse-by-status'
-import { contract } from '~shared/types'
+import { contract, types } from '~shared/types'
 
 import { authenticatedRequestFx } from '../init'
 
-export const fetchMeRequestFx = createEffect({
+export const fetchMeRequestFx = createEffect<
+  void,
+  types.FetchMeRequestDone,
+  types.FetchMeRequestFail
+>({
   async handler() {
     const name = 'fetchMeRequestFx.body'
     const response = await authenticatedRequestFx({

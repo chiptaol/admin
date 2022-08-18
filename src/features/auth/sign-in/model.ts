@@ -1,10 +1,11 @@
 import { sample, split } from 'effector'
 import { createForm } from 'effector-forms'
+import { condition } from 'patronum'
 import * as yup from 'yup'
 
 import { session } from '~entities/session'
 import { createRule } from '~shared/lib/create-rule'
-import { routes } from '~shared/routes'
+import { redirectedByHistory, routes } from '~shared/routes'
 import { types } from '~shared/types'
 
 export const form = createForm({
@@ -58,7 +59,13 @@ split({
   },
 })
 
-sample({
-  clock: session.signInFx.done,
-  target: routes.home.open,
+condition({
+  source: sample({
+    clock: session.signInFx.done,
+    source: routes.signIn.$query,
+    fn: (query) => query?.redirectUri ?? null,
+  }),
+  if: (redirectUri: string | null) => Boolean(redirectUri),
+  then: redirectedByHistory.prepend<string | null | void>((path) => path ?? '/'),
+  else: routes.home.open.prepend(() => ({})),
 })
