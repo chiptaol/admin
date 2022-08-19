@@ -24,7 +24,7 @@ export const checkSessionFx = createEffect(async (_: RouteParamsAndQuery<any>) =
 })
 
 $session.on(fetchMeFx.doneData, (_, { answer }) => answer).reset(signOutFx.done)
-$selectedCinema.on(cinemaSelected, (_, cId) => cId)
+$selectedCinema.on(cinemaSelected, (_, cId) => cId).reset(signOutFx.done)
 
 export const authorizedRoute = <Params>(route: RouteInstance<Params>) => {
   const alreadyAuthorized = sample({

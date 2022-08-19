@@ -1,7 +1,7 @@
 import { Field, useField } from 'effector-forms'
 import { useUnit } from 'effector-react'
 
-import { Button, FormControl, Input, Logo } from '~shared/ui'
+import { Button, FormControl, Input, Logo, PasswordInput } from '~shared/ui'
 
 import * as model from './model'
 
@@ -19,7 +19,7 @@ const Form = () => {
     <form onSubmit={onSubmit} className="w-full">
       <div className="flex flex-col space-y-2 mb-8">
         <FormField label="Почта" field={model.form.fields.email} />
-        <FormField label="Пароль" field={model.form.fields.password} />
+        <FormField type="password" label="Пароль" field={model.form.fields.password} />
       </div>
       <Button isLoading={useUnit(model.$isLoading)} type="submit" className="w-full">
         Войти
@@ -39,10 +39,19 @@ const Form = () => {
 type FormFieldProps = {
   label: string
   field: Field<string | null>
+  type?: 'password'
 }
 
 const FormField = (props: FormFieldProps) => {
   const { value, onChange, errorText, hasError } = useField(props.field)
+
+  if (props.type === 'password') {
+    return (
+      <FormControl isInvalid={hasError()} errorText={errorText()} label={props.label}>
+        <PasswordInput value={value ?? ''} onChange={(e) => onChange(e.currentTarget.value)} />
+      </FormControl>
+    )
+  }
 
   return (
     <FormControl isInvalid={hasError()} errorText={errorText()} label={props.label}>

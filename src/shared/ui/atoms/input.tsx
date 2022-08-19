@@ -3,7 +3,7 @@ import cn from 'classnames'
 
 type NativeInputProps = React.InputHTMLAttributes<HTMLInputElement>
 
-type InputProps = NativeInputProps & {
+export type InputProps = NativeInputProps & {
   className?: string
   isDisabled?: boolean
   isInvalid?: boolean
