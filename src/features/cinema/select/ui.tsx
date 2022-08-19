@@ -8,11 +8,16 @@ import cn from 'classnames'
 
 import * as model from './model'
 
-export const SelectCinema = () => {
+type Props = {
+  CreateCinemaNode: React.ReactNode
+}
+
+export const SelectCinema = (props: Props) => {
   return (
     <Menu.Wrapper>
       <ButtonContent />
       <Menu.Items className="w-56">
+        {props.CreateCinemaNode}
         <CinemasList />
       </Menu.Items>
     </Menu.Wrapper>

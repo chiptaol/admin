@@ -4,6 +4,10 @@ import { createBrowserHistory } from 'history'
 
 export const routes = {
   home: createRoute(),
+  cinema: {
+    create: createRoute(),
+    edit: createRoute(),
+  },
   signIn: createRoute<{ redirectUri?: string }>(),
   notFound: createRoute(),
 }
@@ -14,6 +18,10 @@ export const routesMap = [
   {
     path: '/',
     route: routes.home,
+  },
+  {
+    path: '/cinema/create',
+    route: routes.cinema.create,
   },
   {
     path: '/sign-in',

@@ -62,3 +62,12 @@ export type FetchCinemasRequestDone = {
   answer: typed.Get<typeof contract.fetchCinemasRequestOk>
 }
 export type FetchCinemasRequestFail = GenericErrors
+
+export type FetchCinemaRequest = {
+  id: number
+}
+export type FetchCinemaRequestDone = {
+  status: 'ok'
+  answer: typed.Get<typeof contract.fetchCinemaRequestOk>
+}
+export type FetchCinemaRequestFail = GenericErrors

@@ -22,3 +22,21 @@ export const fetchCinemasRequestFx = createEffect<
     })
   },
 })
+
+export const fetchCinemaRequestFx = createEffect<
+  types.FetchCinemaRequest,
+  types.FetchCinemaRequestDone,
+  types.FetchCinemaRequestFail
+>({
+  async handler({ id }) {
+    const name = 'fetchCinemaRequestFx.body'
+    const response = await authenticatedRequestFx({
+      path: `cinemas/${id}`,
+      method: 'GET',
+    })
+
+    return parseByStatus(name, response, {
+      200: ['ok', contract.fetchCinemaRequestOk],
+    })
+  },
+})

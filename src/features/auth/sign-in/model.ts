@@ -70,8 +70,3 @@ condition({
   then: redirectedByHistory.prepend<string | null | void>((path) => path ?? '/'),
   else: routes.home.open.prepend(() => ({})),
 })
-
-sample({
-  clock: session.model.signInFx.done,
-  target: cinema.model.fetchCinemasFx,
-})

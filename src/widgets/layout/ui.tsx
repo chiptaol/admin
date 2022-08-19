@@ -1,7 +1,7 @@
 import { useStoreMap, useUnit } from 'effector-react'
 
 import { SignOut } from '~features/auth'
-import { SelectCinema } from '~features/cinema'
+import { CreateOrEditCinema, SelectCinema } from '~features/cinema'
 import { session, UserAvatar } from '~entities/session'
 import { createDisclosure } from '~shared/lib/disclosure'
 import { router } from '~shared/routes'
@@ -23,7 +23,7 @@ export const Layout = (props: Props) => {
     <div className="w-full h-full flex flex-col">
       <Header
         onMenuButtonClick={disclosure.open}
-        StartAdornment={<SelectCinema />}
+        StartAdornment={<SelectCinema CreateCinemaNode={<CreateOrEditCinema.Button />} />}
         EndAdornment={<UserMenu />}
       />
       <div className="flex-grow overflow-y-auto flex">

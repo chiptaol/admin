@@ -1,6 +1,6 @@
 import { useUnit } from 'effector-react'
 
-import { CreateHall } from '~features/create-hall'
+import { CinemaPaper } from '~entities/cinema'
 import { PageLoader } from '~shared/ui'
 
 import * as model from './model'
@@ -13,8 +13,8 @@ export const HomePage = () => {
   }
 
   return (
-    <div className="w-full h-full">
-      <CreateHall />
+    <div className="w-full h-full px-5 py-6">
+      <CinemaPaper />
     </div>
   )
 }
