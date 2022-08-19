@@ -1,3 +1,4 @@
+import { redirect } from 'atomic-router'
 import { sample } from 'effector'
 
 import { cinema } from '~entities/cinema'
@@ -13,4 +14,9 @@ sample({
   filter: Boolean,
   fn: (cId) => ({ id: cId }),
   target: cinema.model.fetchCinemaFx,
+})
+
+redirect({
+  clock: cinema.model.fetchCinemaFx.fail,
+  route: routes.notFound,
 })

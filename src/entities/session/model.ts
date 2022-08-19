@@ -33,7 +33,7 @@ export const authorizedRoute = <Params>(route: RouteInstance<Params>) => {
   })
 
   const cinemaSelected = sample({
-    clock: [appStarted, $selectedCinema],
+    clock: [appStarted, $selectedCinema, route.opened],
     source: $selectedCinema,
     filter: (cId) => cId !== null,
   })
@@ -41,7 +41,7 @@ export const authorizedRoute = <Params>(route: RouteInstance<Params>) => {
   return chainRoute({
     route,
     beforeOpen: checkSessionFx,
-    openOn: [combineEvents({ events: [alreadyAuthorized, cinemaSelected] })],
+    openOn: [combineEvents({ events: [alreadyAuthorized, cinemaSelected], reset: route.closed })],
   })
 }
 
@@ -65,4 +65,6 @@ persist({
   key: 'cinemaId',
 })
 
-cinemaSelected.watch(() => window.location.reload())
+cinemaSelected.watch(() => {
+  window.location.href = '/'
+})

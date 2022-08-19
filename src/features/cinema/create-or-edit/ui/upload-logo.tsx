@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { BsTrashFill } from 'react-icons/bs'
+import { IoImages } from 'react-icons/io5'
 
 type Props = {
   path: string | null
@@ -38,10 +39,7 @@ const UploadButton = (props: Pick<Props, 'onLogoUploaded'>) => {
         }}
         className="absolute inset-0 opacity-0 cursor-pointer "
       />
-      <div className="flex items-center">
-        <p className="text-sm">logo</p>
-        <span className="text-center">+</span>
-      </div>
+      <IoImages className="h-7 w-7 fill-blue-500" />
     </div>
   )
 }
@@ -60,7 +58,7 @@ const ImageContainter = ({
       >
         <BsTrashFill className="h-[15%] w-[15%] fill-white" />
       </button>
-      <img className="object-cover !w-[150px] h-[150px]" onError={onError} src={path} />
+      <img className="object-contain !w-[150px] h-[150px]" onError={onError} src={path} />
     </div>
   )
 }
@@ -69,8 +67,5 @@ function onChange(event: React.ChangeEvent<HTMLInputElement>) {
   const file = event.target.files?.[0]
   if (!file) return
 
-  // const formData = new FormData()
-  // formData.append('file', file)
-  // const imageSrc = URL.createObjectURL(file)
   return file
 }

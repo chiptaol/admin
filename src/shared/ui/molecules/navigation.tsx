@@ -10,7 +10,7 @@ const navigation = [
   {
     route: routes.home,
     icon: RiMovie2Fill,
-    title: 'cinemas',
+    title: 'Кинотеатр',
     path: '/',
   },
 ]

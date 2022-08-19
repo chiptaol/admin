@@ -24,6 +24,10 @@ export const routesMap = [
     route: routes.cinema.create,
   },
   {
+    path: '/cinema/edit',
+    route: routes.cinema.edit,
+  },
+  {
     path: '/sign-in',
     route: routes.signIn,
   },

@@ -29,7 +29,7 @@ const CinemaNotSelected = () => {
     <Menu.Button withIcon className="items-center w-full ">
       <div className="flex items-center">
         <div className="mr-3 text-left mobileMax:mr-1">
-          <p className="text-lg font-medium text-white">select_cinema</p>
+          <p className="text-lg font-medium text-white">Выберите кинотеатр</p>
         </div>
       </div>
     </Menu.Button>

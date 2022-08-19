@@ -71,3 +71,50 @@ export type FetchCinemaRequestDone = {
   answer: typed.Get<typeof contract.fetchCinemaRequestOk>
 }
 export type FetchCinemaRequestFail = GenericErrors
+
+export type CreateCinemaRequest = {
+  title: string
+  address: string
+  logo_id: string
+  reference_point: string
+  longitude: number
+  latitude: number
+  phone: string
+}
+export type CreateCinemaRequestDone = {
+  status: 'ok'
+  answer: typed.Get<typeof contract.createCinemaRequestOk>
+}
+export type CreateCinemaRequestFail = GenericErrors
+
+export type UploadCinemaLogoRequest = FormData
+export type UploadCinemaLogoRequestDone = {
+  status: 'ok'
+  answer: typed.Get<typeof contract.uploadCinemaLogoRequestOk>
+}
+export type UploadCinemaLogoRequestFail = GenericErrors
+
+export type EditCinemaRequest = {
+  title: string
+  address: string
+  logo_id: string
+  reference_point: string
+  longitude: number
+  latitude: number
+  phone: string
+  id: number
+}
+export type EditCinemaRequestDone = {
+  status: 'ok'
+  answer: typed.Get<typeof contract.editCinemaRequestOk>
+}
+export type EditCinemaRequestFail = GenericErrors
+
+export type DeleteCinemaRequest = {
+  id: number
+}
+export type DeleteCinemaRequestDone = {
+  status: 'ok'
+  answer: typed.Get<typeof contract.deleteCinemaRequestOk>
+}
+export type DeleteCinemaRequestFail = GenericErrors

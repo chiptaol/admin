@@ -1,36 +1,37 @@
 import { Field, useField } from 'effector-forms'
+import { useUnit } from 'effector-react'
 
-import { Button, FormControl, Input } from '~shared/ui'
+import { Button, FormControl, Input, Logo } from '~shared/ui'
 
 import * as model from './model'
 
 export const SignIn = () => {
   return (
     <div className="flex flex-col space-y-5 rounded max-w-lg w-full px-6 py-8 items-center bg-slate-50 shadow-md">
-      <h4 className="text-lg font-semibold">Login</h4>
+      <Logo className="!text-black" />
       <Form />
     </div>
   )
 }
 
-console.log(document.cookie)
-
 const Form = () => {
   return (
     <form onSubmit={onSubmit} className="w-full">
       <div className="flex flex-col space-y-2 mb-8">
-        <FormField label="email" field={model.form.fields.email} />
-        <FormField label="password" field={model.form.fields.password} />
+        <FormField label="Почта" field={model.form.fields.email} />
+        <FormField label="Пароль" field={model.form.fields.password} />
       </div>
-      <Button type="submit" className="w-full">
-        Submit
+      <Button isLoading={useUnit(model.$isLoading)} type="submit" className="w-full">
+        Войти
       </Button>
-      <button
-        type="button"
-        onClick={() => model.form.setForm({ email: 'fbb@gmail.com', password: '300620036Fbb' })}
-      >
-        DEV_BUTTON
-      </button>
+      {import.meta.env.DEV && (
+        <button
+          type="button"
+          onClick={() => model.form.setForm({ email: 'fbb@gmail.com', password: '300620036Fbb' })}
+        >
+          DEV_BUTTON
+        </button>
+      )}
     </form>
   )
 }

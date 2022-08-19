@@ -8,7 +8,7 @@ type Props = {
 export const FormControl = (props: Props) => {
   return (
     <div className="flex flex-col space-y-1">
-      <label className="flex flex-col space-y-2">
+      <label className="flex flex-col space-y-2 font-medium">
         <span className="text-sm">{props.label}</span>
         {props.children}
       </label>

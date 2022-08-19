@@ -26,7 +26,7 @@ export const Layout = (props: Props) => {
         StartAdornment={<SelectCinema CreateCinemaNode={<CreateOrEditCinema.Button />} />}
         EndAdornment={<UserMenu />}
       />
-      <div className="flex-grow overflow-y-auto flex">
+      <div className="flex-grow overflow-y-auto flex relative">
         <LayoutSidebar />
         {props.children}
       </div>

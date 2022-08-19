@@ -1,15 +1,15 @@
 import { MdOutlineAddCircle } from 'react-icons/md'
 import cn from 'classnames'
 import { Field, useField } from 'effector-forms'
+import { reflect } from '@effector/reflect'
 
-import { FormControl, Input, Menu } from '~shared/ui'
+import { Button, FormControl, Input, Menu } from '~shared/ui'
 
 import * as model from '../model'
 import { UploadLogo } from './upload-logo'
-import { useUnit } from 'effector-react'
 import { Map } from './map'
 
-export const Button = () => {
+export const CreateButton = () => {
   return (
     <Menu.Item>
       <div className={cn('w-full')}>
@@ -19,7 +19,7 @@ export const Button = () => {
           className="flex items-center space-x-2 px-3 py-2 transition-colors w-full hover:bg-slate-100 hover:text-black"
         >
           <MdOutlineAddCircle className="fill-blue-800" />
-          <span className="text-base">create_cinema</span>
+          <span className="text-base">Создать кинотеатр</span>
         </button>
       </div>
     </Menu.Item>
@@ -28,36 +28,45 @@ export const Button = () => {
 
 export const Form = () => {
   return (
-    <form className="max-w-4xl w-full">
-      <div className="flex items-start space-x-8 w-full mb-4">
-        <LogoField />
-        <div className="flex items-start flex-wrap w-full gap-2">
-          <div className="flex flex-col space-y-2 max-w-xs w-full">
-            <FormTextField field={model.form.fields.title} label="title" />
-            <FormTextField field={model.form.fields.phone} label="phone" />
-          </div>
-          <div className="flex flex-col space-y-2 max-w-xs w-full">
-            <FormTextField field={model.form.fields.address} label="address" />
-            <FormTextField field={model.form.fields.reference_point} label="reference_point" />
+    <form onSubmit={onSubmit} className="max-w-4xl w-full py-4 h-full">
+      <div className="flex flex-col space-y-4 w-full mb-10">
+        <div className="flex items-start space-x-8 w-full">
+          <LogoField />
+          <div className="flex items-start flex-wrap w-full gap-2">
+            <div className="flex flex-col space-y-2 max-w-xs w-full">
+              <FormTextField field={model.form.fields.title} label="Название" />
+              <FormTextField field={model.form.fields.phone} label="Номер телефона" />
+            </div>
+            <div className="flex flex-col space-y-2 max-w-xs w-full">
+              <FormTextField field={model.form.fields.address} label="Адрес" />
+              <FormTextField field={model.form.fields.reference_point} label="Ориентир" />
+            </div>
           </div>
         </div>
+        <div className="flex flex-col space-y-2 ">
+          <h4 className="text-base font-medium">Выберите локацию на карте</h4>
+          <MapField />
+        </div>
       </div>
-      <div className="flex flex-col space-y-2">
-        <h4 className="text-base font-medium">select_location</h4>
-        <MapField />
+      <div className="flex items-center space-x-2 max-w-[50%]">
+        <CancelButton>Отмена</CancelButton>
+        <SubmitButton>Сохранить</SubmitButton>
       </div>
     </form>
   )
 }
 
 const LogoField = () => {
-  const imagePath = useUnit(model.$imagePath)
+  const { value, errorText, hasError } = useField(model.form.fields.logo)
   return (
-    <UploadLogo
-      path={imagePath}
-      onDeleteClicked={() => model.deleteImageButtonClicked()}
-      onLogoUploaded={(file) => model.imageUploaded(file)}
-    />
+    <div className="w-max flex flex-col space-y-1">
+      <UploadLogo
+        path={value}
+        onDeleteClicked={() => model.deleteImageButtonClicked()}
+        onLogoUploaded={(file) => model.imageUploaded(file)}
+      />
+      {hasError() && <span className="text-sm text-red-500">{errorText()}</span>}
+    </div>
   )
 }
 
@@ -97,4 +106,28 @@ const FormTextField = (props: FormTextFieldProps) => {
       <Input value={value} onChange={(e) => onChange(e.currentTarget.value)} />
     </FormControl>
   )
+}
+
+const SubmitButton = reflect({
+  view: Button,
+  bind: {
+    type: 'submit',
+    className: 'w-full',
+    isLoading: model.$isLoading,
+  },
+})
+
+const CancelButton = reflect({
+  view: Button,
+  bind: {
+    className: 'w-full',
+    variant: 'outline',
+    isDisabled: model.$isLoading,
+    onClick: () => model.cancelButtonClicked(),
+  },
+})
+
+function onSubmit(event: React.FormEvent) {
+  event.preventDefault()
+  model.form.submit()
 }

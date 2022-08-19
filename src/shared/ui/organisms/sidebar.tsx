@@ -11,18 +11,18 @@ type Props = {
 export const Sidebar: React.FC<Props> = ({ isOpen, onClose }) => {
   return (
     <>
-      <div className="h-full min-w-[48px] w-max bg-blue-800">
+      <div className="h-full min-w-[48px] w-max bg-blue-800 sticky top-0">
         <Navigation.Fit />
       </div>
       <Drawer
         transparentOverlay
-        className="!bg-blue-800 p-[0px] max-w-xs"
+        className="!bg-blue-800 p-[0px] !max-w-xs"
         isOpen={isOpen}
         onClose={onClose}
       >
         <div className="flex h-full flex-col">
           <div className="py-3 px-4 flex items-center justify-between h-12">
-            <h1 className="text-lg font-semibold text-white">Menu</h1>
+            <h1 className="text-lg font-semibold text-white">Меню</h1>
             <IconButton
               onClick={onClose}
               aria-label="close"

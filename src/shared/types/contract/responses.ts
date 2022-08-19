@@ -24,3 +24,17 @@ export const fetchCinemasRequestOk = typed.obj({
 export const fetchCinemaRequestOk = typed.obj({
   data: entity.cinema,
 })
+
+export const createCinemaRequestOk = typed.obj({
+  data: entity.cinema,
+})
+
+export const editCinemaRequestOk = typed.obj({
+  data: entity.cinema,
+})
+
+export const uploadCinemaLogoRequestOk = typed.obj({
+  id: typed.string,
+})
+
+export const deleteCinemaRequestOk = typed.nul
