@@ -3,11 +3,10 @@ import { lazy, Suspense } from 'react'
 import { PageLoader } from '~shared/ui'
 
 import './model'
-import './hall'
 
-const Page = lazy(() => import('./page').then((m) => ({ default: m.HallsPage })))
+const Page = lazy(() => import('./page').then((m) => ({ default: m.HallSeatsPage })))
 
-export const HallsPage = () => (
+export const HallSeatsPage = () => (
   <Suspense fallback={<PageLoader />}>
     <Page />
   </Suspense>

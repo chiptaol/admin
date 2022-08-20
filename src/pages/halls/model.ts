@@ -15,3 +15,4 @@ sample({
   fn: (cId) => ({ cId }),
   target: hall.model.fetchHallsFx,
 })
+currentRoute.opened.watch(console.log)

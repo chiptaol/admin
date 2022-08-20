@@ -7,9 +7,9 @@ import { Settings } from './settings'
 import * as model from '../model'
 import { HALL_CONTAINER_WIDTH } from '../lib'
 
-export const CreateHall = () => {
+export const CreateHallScheme = () => {
   return (
-    <div className="flex space-x-5 p-6">
+    <div className="flex space-x-5">
       <Settings />
       <div className="flex flex-col space-y-4 w-max h-max relative">
         <CinemaHallScreen />
@@ -61,7 +61,11 @@ const SeatsRow = ({ rowOrder }: { rowOrder: number }) => {
   return (
     <div style={{ top: row.y, left: row.x }} className="flex items-center w-max absolute">
       {Object.values(seats).map((seat, index) => (
-        <div key={seat.id} style={{ marginLeft: index !== 0 ? gapBetweenSeats : 0 }}>
+        <div
+          onClick={() => model.seatClicked({ rowOrder, seatId: seat.id })}
+          key={seat.id}
+          style={{ marginLeft: index !== 0 ? gapBetweenSeats : 0 }}
+        >
           <Seat isVip={seat.isVip} place={index + 1} />
         </div>
       ))}

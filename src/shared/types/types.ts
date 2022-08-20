@@ -128,6 +128,16 @@ export type FetchHallsRequestDone = {
 }
 export type FetchHallsRequestFail = GenericErrors
 
+export type FetchHallRequest = {
+  cId: number
+  hId: number
+}
+export type FetchHallRequestDone = {
+  status: 'ok'
+  answer: typed.Get<typeof contract.fetchHallRequestOk>
+}
+export type FetchHallRequestFail = GenericErrors
+
 export type Hall = typed.Get<typeof contract.hall>
 
 export type CreateHallRequest = {
@@ -164,3 +174,32 @@ export type DeleteHallRequestDone = {
   answer: typed.Get<typeof contract.deleteHallRequestOk>
 }
 export type DeleteHallRequestFail = GenericErrors
+
+export type FetchHallSeatsRequest = {
+  cId: number
+  hId: number
+}
+export type FetchHallSeatsRequestDone = {
+  status: 'ok'
+  answer: typed.Get<typeof contract.fetchHallSeatsRequestOk>
+}
+export type FetchHallSeatsRequestFail = GenericErrors
+
+export type Seat = typed.Get<typeof contract.seat>
+
+export type CreateHallSeatsRequest = {
+  cId: number
+  hId: number
+  seats: Array<{
+    is_vip: boolean
+    row: number
+    place: number
+    x: number
+    y: number
+  }>
+}
+export type CreateHallSeatsRequestDone = {
+  status: 'ok'
+  answer: typed.Get<typeof contract.createHallSeatsRequestOk>
+}
+export type CreateHallSeatsRequestFail = GenericErrors

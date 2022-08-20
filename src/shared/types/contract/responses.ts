@@ -43,6 +43,10 @@ export const fetchHallsRequestOk = typed.obj({
   data: typed.arr(entity.hall),
 })
 
+export const fetchHallRequestOk = typed.obj({
+  data: entity.hall,
+})
+
 export const createHallRequestOk = typed.obj({
   data: entity.hall,
 })
@@ -52,3 +56,9 @@ export const editHallRequestOk = typed.obj({
 })
 
 export const deleteHallRequestOk = typed.nul
+
+export const fetchHallSeatsRequestOk = typed.obj({
+  data: typed.arr(entity.seat),
+})
+
+export const createHallSeatsRequestOk = typed.nul

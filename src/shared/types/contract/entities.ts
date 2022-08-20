@@ -26,3 +26,12 @@ export const hall = typed.obj({
   is_vip: typed.bool,
   description: typed.str.maybe,
 })
+
+export const seat = typed.obj({
+  id: typed.num,
+  is_vip: typed.bool,
+  row: typed.num,
+  place: typed.num,
+  x: typed.num,
+  y: typed.num,
+})

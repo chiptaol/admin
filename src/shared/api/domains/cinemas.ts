@@ -134,6 +134,24 @@ export const fetchHallsRequestFx = createEffect<
   },
 })
 
+export const fetchHallRequestFx = createEffect<
+  types.FetchHallRequest,
+  types.FetchHallRequestDone,
+  types.FetchHallRequestFail
+>({
+  async handler({ cId, hId }) {
+    const name = 'fetchHallRequestFx.body'
+    const response = await authenticatedRequestFx({
+      path: `cinemas/${cId}/halls/${hId}`,
+      method: 'GET',
+    })
+
+    return parseByStatus(name, response, {
+      200: ['ok', contract.fetchHallRequestOk],
+    })
+  },
+})
+
 export const createHallRequestFx = createEffect<
   types.CreateHallRequest,
   types.CreateHallRequestDone,
@@ -186,6 +204,43 @@ export const deleteHallRequestFx = createEffect<
 
     return parseByStatus(name, response, {
       204: ['ok', contract.deleteHallRequestOk],
+    })
+  },
+})
+
+export const fetchHallSeatsRequestFx = createEffect<
+  types.FetchHallSeatsRequest,
+  types.FetchHallSeatsRequestDone,
+  types.FetchHallSeatsRequestFail
+>({
+  async handler({ cId, hId }) {
+    const name = 'fetchHallSeatsRequestFx.body'
+    const response = await authenticatedRequestFx({
+      path: `cinemas/${cId}/halls/${hId}/seats`,
+      method: 'GET',
+    })
+
+    return parseByStatus(name, response, {
+      200: ['ok', contract.fetchHallSeatsRequestOk],
+    })
+  },
+})
+
+export const createHallSeatsRequestFx = createEffect<
+  types.CreateHallSeatsRequest,
+  types.CreateHallSeatsRequestDone,
+  types.CreateHallSeatsRequestFail
+>({
+  async handler({ cId, hId, ...body }) {
+    const name = 'createHallSeatsRequestFx.body'
+    const response = await authenticatedRequestFx({
+      path: `cinemas/${cId}/halls/${hId}/seats`,
+      method: 'POST',
+      body,
+    })
+
+    return parseByStatus(name, response, {
+      201: ['ok', contract.createHallSeatsRequestOk],
     })
   },
 })

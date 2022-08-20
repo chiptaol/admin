@@ -16,3 +16,9 @@ body,
   background: #89b8ff;
   border-radius: 8px;
 }
+
+.hide-input-spin-button::-webkit-outer-spin-button,
+.hide-input-spin-button::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
