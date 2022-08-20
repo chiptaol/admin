@@ -9,13 +9,37 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@effector/reflect": "^8.0.0",
+    "@headlessui/react": "^1.6.6",
+    "@pbe/react-yandex-maps": "^1.1.8",
+    "atomic-router": "^0.6.1",
+    "atomic-router-react": "^0.6.2",
+    "classnames": "^2.3.1",
+    "compose-function": "^3.0.3",
+    "effector": "^22.3.0",
+    "effector-forms": "^0.0.24",
+    "effector-react": "^22.1.6",
+    "effector-storage": "^5.0.1",
+    "history": "^5.3.0",
+    "patronum": "^1.10.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.4.0",
+    "react-toastify": "^9.0.8",
+    "react-yandex-maps": "^4.6.0",
+    "typed-contracts": "^3.0.0",
+    "vite-plugin-svgr": "^2.2.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@types/compose-function": "^0.0.30",
+    "@types/node": "^18.7.3",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.1",
+    "autoprefixer": "^10.4.8",
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8",
     "typescript": "^4.6.4",
     "vite": "^3.0.7"
   }
