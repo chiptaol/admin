@@ -19,7 +19,6 @@ sample({
 
 sample({
   clock: session.model.signInFx.done,
-  filter: session.model.$selectedCinema.map((is) => !is),
   target: fetchCinemasFx,
 })
 

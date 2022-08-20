@@ -8,6 +8,11 @@ export const routes = {
     create: createRoute(),
     edit: createRoute(),
   },
+  halls: createRoute(),
+  hall: {
+    current: createRoute<{ hId: number }>(),
+    seats: createRoute<{ hId: number }>(),
+  },
   signIn: createRoute<{ redirectUri?: string }>(),
   notFound: createRoute(),
 }
@@ -26,6 +31,22 @@ export const routesMap = [
   {
     path: '/cinema/edit',
     route: routes.cinema.edit,
+  },
+  {
+    path: '/halls',
+    route: routes.halls,
+  },
+  {
+    path: '/halls/:hId*',
+    route: routes.halls,
+  },
+  {
+    path: '/halls/:hId',
+    route: routes.hall.current,
+  },
+  {
+    path: '/seats/:hId',
+    route: routes.hall.seats,
   },
   {
     path: '/sign-in',

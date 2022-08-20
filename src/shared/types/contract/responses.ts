@@ -38,3 +38,17 @@ export const uploadCinemaLogoRequestOk = typed.obj({
 })
 
 export const deleteCinemaRequestOk = typed.nul
+
+export const fetchHallsRequestOk = typed.obj({
+  data: typed.arr(entity.hall),
+})
+
+export const createHallRequestOk = typed.obj({
+  data: entity.hall,
+})
+
+export const editHallRequestOk = typed.obj({
+  data: entity.hall,
+})
+
+export const deleteHallRequestOk = typed.nul

@@ -13,6 +13,12 @@ const navigation = [
     title: 'Кинотеатр',
     path: '/',
   },
+  {
+    route: routes.halls,
+    icon: MdChair,
+    title: 'Залы',
+    path: '/halls',
+  },
 ]
 
 const NavigationWithoutTitles = () => {

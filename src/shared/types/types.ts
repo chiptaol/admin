@@ -118,3 +118,49 @@ export type DeleteCinemaRequestDone = {
   answer: typed.Get<typeof contract.deleteCinemaRequestOk>
 }
 export type DeleteCinemaRequestFail = GenericErrors
+
+export type FetchHallsRequest = {
+  cId: number
+}
+export type FetchHallsRequestDone = {
+  status: 'ok'
+  answer: typed.Get<typeof contract.fetchHallsRequestOk>
+}
+export type FetchHallsRequestFail = GenericErrors
+
+export type Hall = typed.Get<typeof contract.hall>
+
+export type CreateHallRequest = {
+  cId: number
+  title: string
+  description: null | string
+  is_vip: boolean
+}
+export type CreateHallRequestDone = {
+  status: 'ok'
+  answer: typed.Get<typeof contract.createHallRequestOk>
+}
+export type CreateHallRequestFail = GenericErrors
+
+export type EditHallRequest = {
+  cId: number
+  hId: number
+  title: string
+  description: null | string
+  is_vip: boolean
+}
+export type EditHallRequestDone = {
+  status: 'ok'
+  answer: typed.Get<typeof contract.editHallRequestOk>
+}
+export type EditHallRequestFail = GenericErrors
+
+export type DeleteHallRequest = {
+  cId: number
+  hId: number
+}
+export type DeleteHallRequestDone = {
+  status: 'ok'
+  answer: typed.Get<typeof contract.deleteHallRequestOk>
+}
+export type DeleteHallRequestFail = GenericErrors

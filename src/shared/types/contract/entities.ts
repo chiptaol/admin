@@ -19,3 +19,10 @@ export const cinema = typed.obj({
     path: typed.str,
   }).maybe,
 })
+
+export const hall = typed.obj({
+  id: typed.num,
+  title: typed.string,
+  is_vip: typed.bool,
+  description: typed.str.maybe,
+})

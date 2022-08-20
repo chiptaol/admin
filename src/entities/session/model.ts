@@ -38,7 +38,7 @@ export const authorizedRoute = <Params>(route: RouteInstance<Params>) => {
     filter: (cId) => cId !== null,
   })
 
-  return chainRoute({
+  return chainRoute<Params>({
     route,
     beforeOpen: checkSessionFx,
     openOn: [combineEvents({ events: [alreadyAuthorized, cinemaSelected], reset: route.closed })],
