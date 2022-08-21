@@ -48,4 +48,4 @@ $halls
   })
 $hall.on(fetchHallFx.doneData, (_, { answer }) => answer.data)
 $hallSeats.on(fetchHallSeatsFx.doneData, (_, { answer }) => [...answer.data])
-$scale.on($biggestRow, (scale, biggestRow) => (biggestRow > 500 ? 500 / biggestRow : scale))
+$scale.on($biggestRow, (scale, biggestRow) => (biggestRow > 500 ? 500 / biggestRow : 1))

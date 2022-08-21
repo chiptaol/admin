@@ -50,8 +50,8 @@ export function normalizeRequestBody(rows: Row[]) {
 
   const minRowX = Math.min(...rowsX)
 
-  if (minRowX > 50) {
-    substract = minRowX - 50
+  if (minRowX > 0) {
+    substract = minRowX
   }
 
   return rows.reduce<types.CreateHallSeatsRequest['seats']>((acc, next) => {

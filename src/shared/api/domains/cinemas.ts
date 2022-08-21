@@ -240,7 +240,7 @@ export const createHallSeatsRequestFx = createEffect<
     })
 
     return parseByStatus(name, response, {
-      201: ['ok', contract.createHallSeatsRequestOk],
+      204: ['ok', contract.createHallSeatsRequestOk],
     })
   },
 })

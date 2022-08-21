@@ -13,7 +13,6 @@ export const HallSeats = () => {
             <Seats />
           </ZoomContainer>
         </Container>
-        <Rows />
       </div>
       <Zoom />
     </div>
