@@ -23,9 +23,9 @@ export const SeanceCard = (props: Props) => {
 
   return (
     <div className="max-w-md w-full rounded border border-gray-200 shadow-md px-6 py-4">
-      <Row label="Название фильма" title={seance.movie.title} />
+      <Row label="Название фильма" title={seance.movie.title ?? '-'} />
       <Hr />
-      <Row label="Жанры" title={seance.movie.genres.join(', ')} />
+      <Row label="Жанры" title={(seance.movie.genres ?? []).join(', ')} />
       <Hr />
       <Row label="Цена" title={beautifyPrice(seance.prices)} />
       <Hr />

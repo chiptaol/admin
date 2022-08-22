@@ -44,9 +44,9 @@ export const seat = typed.obj({
 
 export const movie = typed.obj({
   id: typed.num,
-  title: typed.str,
+  title: typed.str.maybe,
   poster_path: typed.str.maybe,
-  genres: typed.arr(typed.str),
+  genres: typed.arr(typed.str).maybe,
 })
 
 export const seance = typed.obj({

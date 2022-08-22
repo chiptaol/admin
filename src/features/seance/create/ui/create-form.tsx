@@ -1,8 +1,8 @@
 import dayjs from 'dayjs'
 import { useList, useStoreMap, useUnit } from 'effector-react'
-import { FaCrown } from 'react-icons/fa'
+import { GrClose } from 'react-icons/gr'
 
-import { Button, FormControl, Input, Select } from '~shared/ui'
+import { Button, FormControl, IconButton, Input, Select } from '~shared/ui'
 
 import * as model from '../model'
 
@@ -53,6 +53,13 @@ const Field = (props: FieldsProps & { index: number }) => {
         <DateField id={props.id} />
         <DateTimeField id={props.id} />
         <PriceField id={props.id} />
+        <IconButton
+          onClick={() => model.removeField(props.id)}
+          className="!p-2 hover:bg-blue-50 transition-colors"
+          aria-label="remove-field"
+        >
+          <GrClose />
+        </IconButton>
       </div>
     </div>
   )
@@ -181,18 +188,22 @@ const StandardSeatPriceField = (props: FieldsProps) => {
   const price = useStoreMap({
     store: model.$formFields,
     keys: [props.id],
-    fn: (fields, [id]) => fields[id]?.standard_seat_price ?? 0,
+    fn: (fields, [id]) => fields[id]?.standard_seat_price ?? '',
   })
-  console.log(new Intl.NumberFormat().format(price))
   return (
     <FormControl label="Стоимость обычного билета">
       <Input
         type="number"
         className="hide-input-spin-button"
         value={price}
-        onChange={(e) =>
-          model.standardPriceChanged({ fieldId: props.id, price: +e.currentTarget.value })
-        }
+        onChange={(e) => {
+          const value = e.currentTarget.value
+          if (value !== '') {
+            model.standardPriceChanged({ fieldId: props.id, price: +value })
+          } else {
+            model.standardPriceChanged({ fieldId: props.id, price: null })
+          }
+        }}
       />
     </FormControl>
   )
@@ -202,18 +213,22 @@ const VipSeatPriceField = (props: FieldsProps) => {
   const price = useStoreMap({
     store: model.$formFields,
     keys: [props.id],
-    fn: (fields, [id]) => fields[id]?.vip_seat_price ?? 0,
+    fn: (fields, [id]) => fields[id]?.vip_seat_price ?? '',
   })
-  console.log(new Intl.NumberFormat().format(price))
   return (
     <FormControl label="Стоимость VIP билета">
       <Input
         type="number"
         className="hide-input-spin-button"
         value={price}
-        onChange={(e) =>
-          model.vipPriceChanged({ fieldId: props.id, price: +e.currentTarget.value })
-        }
+        onChange={(e) => {
+          const value = e.currentTarget.value
+          if (value !== '') {
+            model.vipPriceChanged({ fieldId: props.id, price: +value })
+          } else {
+            model.vipPriceChanged({ fieldId: props.id, price: null })
+          }
+        }}
       />
     </FormControl>
   )

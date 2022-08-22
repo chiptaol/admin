@@ -2,7 +2,6 @@ import { attach, createDomain, createEvent, createStore, restore, sample } from 
 import { debounce } from 'patronum'
 import { seance } from '~entities/seance'
 import { session } from '~entities/session'
-import { form } from '~features/auth/sign-in/model'
 import { request } from '~shared/api'
 import { createOid } from '~shared/lib/create-oid'
 import { createDisclosure } from '~shared/lib/disclosure'
@@ -23,19 +22,27 @@ export const formatSelected = createEvent<{ fieldId: string; fId: number }>()
 export const seanceFieldAdded = createEvent()
 export const dateSelected = createEvent<{ fieldId: string; date: string }>()
 export const dateTimeSelected = createEvent<{ fieldId: string; dateTime: string }>()
-export const standardPriceChanged = createEvent<{ fieldId: string; price: number }>()
-export const vipPriceChanged = createEvent<{ fieldId: string; price: number }>()
+export const standardPriceChanged = createEvent<{ fieldId: string; price: number | null }>()
+export const vipPriceChanged = createEvent<{ fieldId: string; price: number | null }>()
 export const movieReseted = createEvent()
+export const removeField = createEvent<string>()
 const resetForm = createEvent()
 const reset = createEvent()
 export const submitButtonClicked = createEvent()
 
-export const $search = restore(searchChanged, '')
+export const $search = restore(searchChanged, '').reset([
+  resetForm,
+  movieReseted,
+  routes.createSeance.open,
+])
 
 const fetchMoviesFx = attach({
   effect: request.fetchMoviesRequestFx,
   source: $search,
-  mapParams: (_: void, title) => ({ title }),
+  mapParams: (_: void, title) => {
+    if (title.length === 0) throw Error()
+    return { title }
+  },
 })
 const fetchHallsFx = attach({
   source: session.model.$selectedCinema,
@@ -173,6 +180,11 @@ $formFields
       ...fields,
       [fieldId]: { ...field, vip_seat_price: price },
     }
+  })
+  .on(removeField, (fields, id) => {
+    const { [id]: _, ...next } = fields
+
+    return next
   })
 
 sample({
