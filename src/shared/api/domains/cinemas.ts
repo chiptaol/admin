@@ -166,7 +166,7 @@ export const createHallRequestFx = createEffect<
     })
 
     return parseByStatus(name, response, {
-      200: ['ok', contract.createHallRequestOk],
+      201: ['ok', contract.createHallRequestOk],
     })
   },
 })
@@ -241,6 +241,61 @@ export const createHallSeatsRequestFx = createEffect<
 
     return parseByStatus(name, response, {
       204: ['ok', contract.createHallSeatsRequestOk],
+    })
+  },
+})
+
+export const createSeancesRequestFx = createEffect<
+  types.CreateSeancesRequest,
+  types.CreateSeancesRequestDone,
+  types.CreateSeancesRequestFail
+>({
+  async handler({ cId, ...body }) {
+    const name = 'createSeancesRequestFx.body'
+    const response = await authenticatedRequestFx({
+      path: `cinemas/${cId}/seances`,
+      method: 'POST',
+      body,
+    })
+
+    return parseByStatus(name, response, {
+      204: ['ok', contract.createSeancesRequestOk],
+    })
+  },
+})
+
+export const fetchSeancesRequestFx = createEffect<
+  types.FetchSeancesRequest,
+  types.FetchSeancesRequestDone,
+  types.FetchSeancesRequestFail
+>({
+  async handler({ cId }) {
+    const name = 'fetchSeancesRequestFx.body'
+    const response = await authenticatedRequestFx({
+      path: `cinemas/${cId}/seances`,
+      method: 'GET',
+    })
+
+    return parseByStatus(name, response, {
+      200: ['ok', contract.fetchSeancesRequestOk],
+    })
+  },
+})
+
+export const deleteSeanceRequestFx = createEffect<
+  types.DeleteSeanceRequest,
+  types.DeleteSeanceRequestDone,
+  types.DeleteSeanceRequestFail
+>({
+  async handler({ cId, sId }) {
+    const name = 'deleteSeanceRequestFx.body'
+    const response = await authenticatedRequestFx({
+      path: `cinemas/${cId}/seances/${sId}`,
+      method: 'DELETE',
+    })
+
+    return parseByStatus(name, response, {
+      204: ['ok', contract.deleteSeanceRequestOk],
     })
   },
 })

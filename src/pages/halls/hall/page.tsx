@@ -23,6 +23,7 @@ export const HallPage = () => {
           title={hall.title}
           EndAdornment={hall.is_vip && <FaCrown className="w-7 h-7 fill-yellow-500" />}
         />
+        <Row label="Форматы" title={hall.formats.map((format) => format.title).join(', ')} />
         <Row label="Описание" title={hall.description ?? 'Описания нет'} />
         <div className="flex items-center w-full space-x-2">
           <DeleteHall />

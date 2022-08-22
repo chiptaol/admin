@@ -62,3 +62,15 @@ export const fetchHallSeatsRequestOk = typed.obj({
 })
 
 export const createHallSeatsRequestOk = typed.nul
+
+export const fetchMoviesRequestOk = typed.arr(
+  typed.obj({ id: typed.num, release_date: typed.str, title: typed.str })
+)
+
+export const createSeancesRequestOk = typed.nul
+
+export const fetchSeancesRequestOk = typed.obj({
+  data: typed.arr(entity.seance),
+})
+
+export const deleteSeanceRequestOk = typed.nul

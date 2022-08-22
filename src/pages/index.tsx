@@ -10,6 +10,8 @@ import { CreateCinemaPage } from './cinema/create'
 import { EditCinemaPage } from './cinema/edit'
 import { HallsPage } from './halls'
 import { HallSeatsPage } from './halls/seats'
+import { SeancesPage } from './seances'
+import { CreateSeancePage } from './seances/create'
 
 export const Pages = () => (
   <Layout>
@@ -18,6 +20,8 @@ export const Pages = () => (
     <Route route={routes.cinema.edit} view={EditCinemaPage} />
     <Route route={routes.halls} view={HallsPage} />
     <Route route={routes.hall.seats} view={HallSeatsPage} />
+    <Route route={routes.seances} view={SeancesPage} />
+    <Route route={routes.createSeance} view={CreateSeancePage} />
     <Route route={routes.signIn} view={SignInPage} />
     <Route route={routes.notFound} view={NotFoundPage} />
   </Layout>

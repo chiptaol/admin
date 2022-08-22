@@ -14,6 +14,9 @@ export const routes = {
     seats: createRoute<{ hId: number }>(),
   },
   signIn: createRoute<{ redirectUri?: string }>(),
+  seances: createRoute(),
+  seance: createRoute<{ sId: number }>(),
+  createSeance: createRoute(),
   notFound: createRoute(),
 }
 
@@ -47,6 +50,22 @@ export const routesMap = [
   {
     path: '/seats/:hId',
     route: routes.hall.seats,
+  },
+  {
+    path: '/seances',
+    route: routes.seances,
+  },
+  {
+    path: '/seances/:sId*',
+    route: routes.seances,
+  },
+  {
+    path: '/seances/:sId',
+    route: routes.seance,
+  },
+  {
+    path: '/seance/create',
+    route: routes.createSeance,
   },
   {
     path: '/sign-in',

@@ -49,13 +49,40 @@ export const form = createForm({
       init: false,
       rules: [createRule({ name: 'is_vip', schema: yup.bool().not(['required']) })],
     },
+    format_ids: {
+      init: [] as number[],
+      rules: [
+        createRule({
+          name: 'format_ids',
+          schema: yup
+            .array()
+            .of(yup.number().required())
+            .min(1, 'Выберите формат')
+            .required('Обязательное поле'),
+        }),
+      ],
+    },
   },
 })
+
+export const FORMATS = [
+  {
+    id: 1,
+    title: '2D',
+  },
+  {
+    id: 2,
+    title: '3D',
+  },
+]
 
 export const disclosure = createDisclosure()
 const formValidated = form.formValidated.map(normalizeRequestFormFields)
 
 export const $action = createStore<'create' | 'edit'>('create')
+export const $formats = form.fields.format_ids.$value.map((formats) =>
+  FORMATS.filter((format) => !formats.includes(format.id))
+)
 
 const createHallFx = attach({
   effect: hall.model.createHallFx,
@@ -138,6 +165,7 @@ function normalizeResponseFormFields(hall: types.Hall) {
     title: hall.title,
     is_vip: hall.is_vip,
     description: hall.description ?? '',
+    format_ids: hall.formats.map((format) => format.id),
   }
 }
 

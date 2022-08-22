@@ -20,11 +20,17 @@ export const cinema = typed.obj({
   }).maybe,
 })
 
+export const format = typed.obj({
+  id: typed.number,
+  title: typed.str,
+})
+
 export const hall = typed.obj({
   id: typed.num,
   title: typed.string,
   is_vip: typed.bool,
   description: typed.str.maybe,
+  formats: typed.arr(format),
 })
 
 export const seat = typed.obj({
@@ -34,4 +40,25 @@ export const seat = typed.obj({
   place: typed.num,
   x: typed.num,
   y: typed.num,
+})
+
+export const movie = typed.obj({
+  id: typed.num,
+  title: typed.str,
+  poster_path: typed.str.maybe,
+  genres: typed.arr(typed.str),
+})
+
+export const seance = typed.obj({
+  id: typed.num,
+  format,
+  start_date_time: typed.str,
+  prices: typed.obj({
+    vip: typed.num.maybe,
+    standard: typed.num.maybe,
+  }),
+  hall: typed.obj({
+    title: typed.str,
+  }),
+  movie,
 })

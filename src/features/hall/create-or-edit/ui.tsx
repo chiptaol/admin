@@ -1,6 +1,7 @@
 import { reflect } from '@effector/reflect'
 import { Field, useField } from 'effector-forms'
-import { useUnit } from 'effector-react'
+import { useList, useStoreMap, useUnit } from 'effector-react'
+import { useMemo } from 'react'
 import { BsPlusLg } from 'react-icons/bs'
 
 import { Button, FormControl, IconButton, Input, Modal, Textarea } from '~shared/ui'
@@ -11,7 +12,7 @@ export const CreateButton = () => {
   return (
     <IconButton
       onClick={() => model.createButtonClicked()}
-      className="p-2 hover:bg-blue-50 transition-colors"
+      className="!p-2 hover:bg-blue-50 transition-colors"
       aria-label="create-hall"
     >
       <BsPlusLg />
@@ -50,6 +51,7 @@ const Form = () => {
     <form onSubmit={onSubmit} className="w-full flex flex-col space-y-1.5">
       <FormTextField type="input" field={model.form.fields.title} label="Название" />
       <IsVipField />
+      <FormatField />
       <FormTextField type="textarea" field={model.form.fields.description} label="Описание" />
       <div className="flex w-full space-x-2 mt-5">
         <Button
@@ -89,6 +91,53 @@ const FormTextField = (props: FormTextFieldProps) => {
         />
       )}
     </FormControl>
+  )
+}
+
+const FormatField = () => {
+  const { errorText, hasError, value, onChange } = useField(model.form.fields.format_ids)
+  const formats = useList(model.$formats, (format) => (
+    <option value={format.id}>{format.title}</option>
+  ))
+  const selected = useList(model.form.fields.format_ids.$value, (formatId) => (
+    <SelectedFormat formatId={formatId} />
+  ))
+
+  return (
+    <FormControl label="Выберите форматы" errorText={errorText()} isInvalid={hasError()}>
+      <select
+        className="bg-gray-100 px-4 py-2.5 rounded border-2 border-gray-200"
+        value="select"
+        onChange={(e) => onChange(value.concat(+e.currentTarget.value))}
+      >
+        <option value="select" disabled>
+          Форматы
+        </option>
+        {formats}
+      </select>
+      <div className="flex gap-2">{selected}</div>
+    </FormControl>
+  )
+}
+
+const SelectedFormat = (props: { formatId: number }) => {
+  const format = useMemo(
+    () => model.FORMATS.find(({ id }) => id === props.formatId) ?? null,
+    [props.formatId]
+  )
+  const { value } = useField(model.form.fields.format_ids)
+
+  if (!format) return null
+
+  return (
+    <span
+      onClick={() =>
+        model.form.fields.format_ids.onChange(value.filter((v) => v !== props.formatId))
+      }
+      className="px-1.5 py-1 rounded-lg bg-gray-300 text-sm cursor-pointer"
+    >
+      {format.title}
+    </span>
   )
 }
 

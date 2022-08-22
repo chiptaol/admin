@@ -3,6 +3,7 @@ import cn from 'classnames'
 import { useUnit } from 'effector-react'
 import { MdChair } from 'react-icons/md'
 import { RiMovie2Fill } from 'react-icons/ri'
+import { BiMoviePlay } from 'react-icons/bi'
 
 import { router, routes } from '~shared/routes'
 
@@ -18,6 +19,12 @@ const navigation = [
     icon: MdChair,
     title: 'Залы',
     path: '/halls',
+  },
+  {
+    route: routes.seances,
+    icon: BiMoviePlay,
+    title: 'Сеансы',
+    path: '/seances',
   },
 ]
 

@@ -20,7 +20,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           'border-2',
           { 'border-red-500': isInvalid },
           'focus:outline-none focus-visible:ring',
-          'placeholder:opacity-0',
           className
         )}
         disabled={isDisabled}

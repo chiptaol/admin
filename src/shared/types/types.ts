@@ -203,3 +203,54 @@ export type CreateHallSeatsRequestDone = {
   answer: typed.Get<typeof contract.createHallSeatsRequestOk>
 }
 export type CreateHallSeatsRequestFail = GenericErrors
+
+export type SearchMovie = typed.Get<typeof contract.fetchMoviesRequestOk>[number]
+
+export type FetchMoviesRequest = {
+  title: string
+}
+export type FetchMoviesRequestDone = {
+  status: 'ok'
+  answer: typed.Get<typeof contract.fetchMoviesRequestOk>
+}
+export type FetchMoviesRequestFail = GenericErrors
+
+export type Format = typed.Get<typeof contract.format>
+
+export type CreateSeancesRequest = {
+  cId: number
+  seances: Array<{
+    movie_format_id: number
+    start_date_time: string
+    hall_id: number
+    standard_seat_price: number
+    vip_seat_price: number
+  }>
+}
+export type CreateSeancesRequestDone = {
+  status: 'ok'
+  answer: typed.Get<typeof contract.createSeancesRequestOk>
+}
+export type CreateSeancesRequestFail = GenericErrors
+
+export type Seance = typed.Get<typeof contract.seance>
+
+export type FetchSeancesRequest = {
+  cId: number
+}
+export type FetchSeancesRequestDone = {
+  status: 'ok'
+  answer: typed.Get<typeof contract.fetchSeancesRequestOk>
+}
+
+export type FetchSeancesRequestFail = GenericErrors
+
+export type DeleteSeanceRequest = {
+  cId: number
+  sId: number
+}
+export type DeleteSeanceRequestDone = {
+  status: 'ok'
+  answer: typed.Get<typeof contract.deleteSeanceRequestOk>
+}
+export type DeleteSeanceRequestFail = GenericErrors
