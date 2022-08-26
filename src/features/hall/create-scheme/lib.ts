@@ -23,9 +23,9 @@ function generateRow(order: number): Row {
   return {
     id: order,
     order: order,
-    gapBetweenSeats: 5,
+    gapBetweenSeats: 10,
     x: 0,
-    y: (order - 1) * (cinema.config.SEAT_HEIGHT + 5),
+    y: (order - 1) * (cinema.config.SEAT_HEIGHT + 10),
     seats: normalizr(generateSeats(5)),
   }
 }
