@@ -51,14 +51,14 @@ export function normalizeRequestBody(rows: Row[]) {
   const minRowX = Math.min(...rowsX)
 
   if (minRowX > 0) {
-    substract = minRowX - 40
+    substract = minRowX
   }
 
   return rows.reduce<types.CreateHallSeatsRequest['seats']>((acc, next) => {
     const normalizedSeats = Object.values(next.seats).map((seat, index) => ({
       is_vip: seat.isVip,
       y: next.y,
-      x: index * 36 + index * next.gapBetweenSeats + next.x - substract,
+      x: index * 36 + index * next.gapBetweenSeats + next.x - substract + 40,
       place: index + 1,
       row: next.order,
     }))
