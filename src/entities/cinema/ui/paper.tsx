@@ -40,7 +40,7 @@ export const CinemaPaper = () => {
 
 const Location = () => {
   const coords = useStoreMap(model.$cinema, (cinema) =>
-    cinema ? [+cinema.latitude, +cinema.longitude] : null
+    cinema ? [cinema.latitude, cinema.longitude] : null
   )
 
   if (!coords) return null

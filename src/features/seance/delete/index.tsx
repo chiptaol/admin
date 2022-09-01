@@ -3,6 +3,7 @@ import { useUnit } from 'effector-react'
 
 import { seance } from '~entities/seance'
 import { session } from '~entities/session'
+import { request } from '~shared/api'
 import { showErrorToastFx, showSuccessToastFx } from '~shared/lib/toast'
 import { routes } from '~shared/routes'
 import { Button } from '~shared/ui'
@@ -26,7 +27,11 @@ sample({
 
 sample({
   clock: deleteFx.doneData,
-  target: [routes.seances.open, showSuccessToastFx.prepend(() => ({ title: 'Удалено' }))],
+  target: [
+    routes.seances.open,
+    showSuccessToastFx.prepend(() => ({ title: 'Удалено' })),
+    request.revalidateClientRequestFx,
+  ],
 })
 
 sample({

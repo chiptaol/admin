@@ -55,7 +55,7 @@ function getDefaultHeaders(body?: FormData | Record<string, any> | string) {
   }
 }
 
-async function getResponseAnswer<Data>(response: Response): Promise<ResponseResult<Data>> {
+export async function getResponseAnswer<Data>(response: Response): Promise<ResponseResult<Data>> {
   if (contentIs(response.headers, 'application/json')) {
     return response.json()
   }

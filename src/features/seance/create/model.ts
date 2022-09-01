@@ -236,6 +236,7 @@ sample({
     resetForm,
     movieReseted,
     showSuccessToastFx.prepend(() => ({ title: 'Сеансы созданы' })),
+    request.revalidateClientRequestFx,
   ],
 })
 

@@ -9,8 +9,8 @@ export const cinema = typed.obj({
   title: typed.string,
   address: typed.str,
   reference_point: typed.str.maybe,
-  longitude: typed.str,
-  latitude: typed.str,
+  longitude: typed.num,
+  latitude: typed.num,
   phone: typed.string,
 
   //TODO: logo can not be nullable
